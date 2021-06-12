@@ -8,7 +8,7 @@ def home(request):
     return render(request, 'home.html')
 
 def count2(request):
-    return render(request, 'count2.html')
+    return render(request, 'count.html')
 
 def count(request):
     fullText = request.GET['fullText']
