@@ -9,6 +9,8 @@ def home(request):
 
 def count(request):
     fullText = request.GET['fullText']
+    sentenceslist = re.split(r'[.!?]+', fullText)
+
     lowerFullText = fullText.lower()
     newFullText = ""
 
@@ -17,7 +19,6 @@ def count(request):
             newFullText += i
 
     wordlist = newFullText.split()
-    sentenceslist = re.split(r'[.!?]+', fullText)
 
     wordDictionary = {}
 
@@ -26,7 +27,7 @@ def count(request):
             #Increase
             wordDictionary[word] += 1
         else:
-            #Add to the dicitonary
+            #Add to the dictionary
             wordDictionary[word] = 1
     sort_wordDictionary = sorted(wordDictionary.items(), key=lambda x: (x[1], x[0]), reverse=True)
     return render(request, 'count.html', {'fullText':fullText, 'count':len(wordlist), 'wordDictionary': sort_wordDictionary, 'sentencesCount':len(sentenceslist)-1})
